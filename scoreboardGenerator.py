@@ -7,6 +7,7 @@ Created on Sat Jul 13 22:09:39 2019
 
 import json
 import socket
+import time
 
 loadedConfig = {}
 
@@ -163,6 +164,7 @@ def genHTML():
 
     <div id="wrapper">
         <div class="heading">Troy HS CCDC Scoring Engine v0.1<br></div>
+        <div class="heading">Last Update: """ + time.ctime() +  """</div>
         <div class="row">
             <div class="block">
                 <div class="block_center">Team</div>
@@ -242,7 +244,20 @@ def genHTML():
     with open("./index.html", "w+") as f:
         
         f.write(template)
+        
+def saveConfig():
+    
+    with open("./config_save.json", "w+") as f:
+        
+        json.dump(loadedConfig, f)
 
 loadConfig()
-runCheck()
-genHTML()
+
+sleepTime = 30
+
+while True:
+    
+    runCheck()
+    genHTML()
+    saveConfig()
+    time.sleep(30)

@@ -1,0 +1,51 @@
+{
+  "Team1": {
+    "scoredObjects": [
+      {
+        "type": "port",
+        "host": "192.168.1.6",
+        "port": "80",
+        "displayName": "khakis-http",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "192.168.1.4",
+        "port": "3306",
+        "displayName": "slacks-mysql",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "192.168.1.5",
+        "port": "80",
+        "displayName": "shinyshoes-http",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "192.168.1.5",
+        "port": "445",
+        "displayName": "jacket-smb",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "192.168.1.2",
+        "port": "53",
+        "displayName": "tuxedo-dns",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      }
+    ]
+  }
+}

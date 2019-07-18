@@ -27,11 +27,11 @@ def loadConfig():
 def pollPort(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5)
-    try:
-        s.connect((ip, port))
-        return True
-    except:
-        return False
+    result = s.connect_ex((ip,int(port)))
+    if result == 0:
+      return True
+    else:
+      return False
 
 def runCheck():
     

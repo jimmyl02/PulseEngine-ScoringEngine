@@ -36,15 +36,6 @@
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "172.16.202.2",
-        "port": "53",
-        "displayName": "tuxedo-dns",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
       }
     ]
   },
@@ -82,6 +73,15 @@
         "host": "172.16.203.10",
         "port": "445",
         "displayName": "jacket-smb",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "172.16.203.2",
+        "port": "53",
+        "displayName": "tuxedo-dns",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true

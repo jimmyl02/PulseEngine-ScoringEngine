@@ -85,15 +85,6 @@
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "172.16.203.2",
-        "port": "53",
-        "displayName": "tuxedo-dns",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
       }
     ]
   },

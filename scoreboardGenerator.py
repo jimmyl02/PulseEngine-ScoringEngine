@@ -8,6 +8,8 @@ Created on Sat Jul 13 22:09:39 2019
 import json
 import socket
 import time
+import requests
+import hashlib
 
 loadedConfig = {}
 
@@ -32,6 +34,15 @@ def pollPort(ip, port):
       return True
     else:
       return False
+
+def pollHTTP(ip, port, hash):
+    try:
+        if(hashlib.md5(requests.get("http://" + ip + ":" + port, timeout=3).content).hexdigest() == hash):
+            return True
+        else:
+            return False
+    except:
+        return False
 
 def runCheck():
     

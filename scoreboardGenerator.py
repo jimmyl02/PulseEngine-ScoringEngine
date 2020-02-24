@@ -14,18 +14,18 @@ import hashlib
 loadedConfig = {}
 
 def loadConfig():
-    
+
     global loadedConfig
 
     with open("./config.json", "r") as f:
-        
+
         try:
             loadedConfig = json.load(f)
-        
+
         except:
-            
+
             print("Failed to load config")
-        
+
 def pollPort(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(5)
@@ -45,37 +45,55 @@ def pollHTTP(ip, port, hash):
         return False
 
 def runCheck():
-    
+
     for teamName in loadedConfig:
-        
+
         scoredObjects = loadedConfig[teamName]["scoredObjects"]
-        
+
         for scoredObject in scoredObjects:
-            
+
             if scoredObject["type"] == "port":
-                
+
                 scoredObject["checksAttempt"] += 1
                 scoredObject["prevCheck"] = False
-                
+
                 try:
-                    
+
                     result = pollPort(scoredObject["host"], scoredObject["port"])
-                    
+
                     if result == True:
-                        
+
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
-                    
+
                 except:
-                    
+
                     print("Port poll failed, likely fault in parameters")
-                
+
+            elif scoreObject["type"] == "http":
+
+                scoredObject["checksAttempt"] += 1
+                scoredObject["prevCheck"] = False
+
+                try:
+
+                    result = pollHTTP(scoredObject["host"], scoredObject["port"], scoredObject["md5"])
+
+                    if result == True:
+
+                        scoredObject["checksUp"] += 1
+                        scoredObject["prevCheck"] = True
+
+                except:
+
+                    print("HTTP poll failed, likely fault in parameters")
+
             else:
-                
+
                 print("Unknown type, nothing happening")
-                
+
 def genHTML():
-    
+
     template = """
     <html>
 <style>
@@ -193,75 +211,75 @@ def genHTML():
                 <div class="block_center">Uptime</div>
             </div>
         </div>
-    	
+
     """
     for teamName in loadedConfig:
-        
+
         scoredObjects = loadedConfig[teamName]["scoredObjects"]
-        
+
         for scoredObject in scoredObjects:
-            
+
             template += """<div class="row">"""
-            
+
             template += """    <div class="block">"""
-            
+
             template += """        <div class="block_center">""" + teamName + """</div>"""
-            
+
             template += """    </div>"""
-            
+
             if scoredObject["prevCheck"] == True:
-                
+
                 template += """    <div class="block up">"""
-                
+
                 template += """        <div class="block_center">""" + scoredObject["displayName"] + """</div>"""
-                
+
                 template += """    </div>"""
-                
+
             else:
-                
+
                 template += """    <div class="block down">"""
-                
+
                 template += """        <div class="block_center">""" + scoredObject["displayName"] + """</div>"""
-                
+
                 template += """    </div>"""
-                
+
             template += """    <div class="block">"""
-            
+
             template += """        <div class="block_center">""" + str(scoredObject["checksAttempt"]) + """</div>"""
-            
+
             template += """    </div>"""
-            
+
             template += """    <div class="block">"""
-            
+
             template += """        <div class="block_center">""" + str(scoredObject["checksUp"]) + """</div>"""
-            
+
             template += """    </div>"""
-            
+
             template += """    <div class="block">"""
-            
+
             template += """        <div class="block_center">""" + str(round(100 * float(scoredObject["checksUp"]) / float(scoredObject["checksAttempt"]), 3)) + """% </div>"""
-            
+
             template += """    </div>"""
-            
+
             template += """</div>"""
-        
+
     template += """
-    
+
     By: Jimmy Li and Christo Bakis, contact us if anything is broken
-    
+
         </div>
-    
+
     </html>
     """
-    
+
     with open("./index.html", "w+") as f:
-        
+
         f.write(template)
-        
+
 def saveConfig():
-    
+
     with open("./config_save.json", "w+") as f:
-        
+
         json.dump(loadedConfig, f)
 
 loadConfig()
@@ -269,7 +287,7 @@ loadConfig()
 sleepTime = 30
 
 while True:
-    
+
     runCheck()
     genHTML()
     saveConfig()

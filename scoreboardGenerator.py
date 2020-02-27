@@ -16,6 +16,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 loadedConfig = {}
 users = {}
+expectedUsers = []
 
 def getUserAuth(sheet):
     global users
@@ -27,6 +28,7 @@ def getUserAuth(sheet):
 def loadConfig():
 
     global loadedConfig
+    global expectedUsers
 
     with open("./config.json", "r") as f:
 
@@ -37,6 +39,11 @@ def loadConfig():
 
             print("Failed to load config")
 
+    with open("expectedUsers.txt", "r") as f:
+        try:
+            expectedUsers = f.read().splitlines()
+        except:
+            print("Expected users weren't loaded")
 
 def runCheck():
 
@@ -77,14 +84,24 @@ def runCheck():
 
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
+                except:
+                    print("HTTP poll failed, likely fault in parameters")
 
-#            elif scoreObject["type"] == "ssh":
-#                    result = pollSSH(scoredObject["host"], scoredObject["port"], users, passwords#
+            elif scoreObject["type"] == "ssh":
 
+                scoredObject["checksAttempt"] += 1
+                scoredObject["prevCheck"] = False
+                try:
+
+                    result = pollSSH(scoredObject["host"], scoredObject["port"], expectedUsers, teamName)
+
+                    if result == True:
+                        scoredObject["checksUp"] += 1
+                        scoredObject["prevCheck"] = True
 
                 except:
 
-                    print("HTTP poll failed, likely fault in parameters")
+                    print("SSH poll failed, likely fault in parameters")
 
             else:
 

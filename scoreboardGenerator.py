@@ -10,12 +10,25 @@ import socket
 import time
 import requests
 import hashlib
+import pollers
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 loadedConfig = {}
+users = {}
+expectedUsers = []
+
+def getUserAuth(sheet):
+    global users
+    for teamName in loadedConfig:
+        current = sheet.worksheet(teamName)
+        x = dict(zip(current.col_values(1), current.col_values(2)))
+        users[teamName] = x
 
 def loadConfig():
 
     global loadedConfig
+    global expectedUsers
 
     with open("./config.json", "r") as f:
 
@@ -26,23 +39,11 @@ def loadConfig():
 
             print("Failed to load config")
 
-def pollPort(ip, port):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(5)
-    result = s.connect_ex((ip,int(port)))
-    if result == 0:
-      return True
-    else:
-      return False
-
-def pollHTTP(ip, port, hash):
-    try:
-        if(hashlib.md5(requests.get("http://" + ip + ":" + port, timeout=3).content).hexdigest() == hash):
-            return True
-        else:
-            return False
-    except:
-        return False
+    with open("expectedUsers.txt", "r") as f:
+        try:
+            expectedUsers = f.read().splitlines()
+        except:
+            print("Expected users weren't loaded")
 
 def runCheck():
 
@@ -83,10 +84,24 @@ def runCheck():
 
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
+                except:
+                    print("HTTP poll failed, likely fault in parameters")
+
+            elif scoreObject["type"] == "ssh":
+
+                scoredObject["checksAttempt"] += 1
+                scoredObject["prevCheck"] = False
+                try:
+
+                    result = pollSSH(scoredObject["host"], scoredObject["port"], expectedUsers, teamName)
+
+                    if result == True:
+                        scoredObject["checksUp"] += 1
+                        scoredObject["prevCheck"] = True
 
                 except:
 
-                    print("HTTP poll failed, likely fault in parameters")
+                    print("SSH poll failed, likely fault in parameters")
 
             else:
 
@@ -278,17 +293,26 @@ def genHTML():
 
 def saveConfig():
 
+
     with open("./config_save.json", "w+") as f:
 
         json.dump(loadedConfig, f)
 
-loadConfig()
+    with open("./users.json", "w+") as f:
+        json.dump(users, f)
 
-sleepTime = 30
+def main():
+    loadConfig()
+    scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("Engine")
+    while True:
+        getUserAuth(sheet)
+        runCheck()
+        genHTML()
+        saveConfig()
+        time.sleep(10)
 
-while True:
-
-    runCheck()
-    genHTML()
-    saveConfig()
-    time.sleep(30)
+if __name__ == "__main__":
+    main()

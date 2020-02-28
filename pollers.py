@@ -1,6 +1,7 @@
 import socket
 import requests
 import os
+import ftplib
 
 def pollPort(ip, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,9 +27,23 @@ def pollSSH(ip, port, users, teamName):
         with open("./users.json") as f:
             usersList = json.load(f)
             team = usersList[teamName]
-            for username in team:
-                if(subprocess.call("sshpass -f <(printf '%s\n'" + team[username] + ") ssh -q " +  username + "@" + ip + " -p " + port + " exit") != 0):
+            for username in users:
+                if(subprocess.call("sshpass -f <(printf '%s\n'" + team[username] + ") ssh -q -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"" +  username + "@" + ip + " -p " + port + " exit") != 0):
                     return False
+            return True
+    except:
+        return False
+
+
+def pollFTP(ip, port, teamName):
+    try:
+        with open("./users.json") as f:
+            usersList = json.load(f)
+            team = usersList[teamName]
+            username = list(team.keys())[0]
+            password = list(team.values())[0]
+            ftp = FTP(ip, port)
+            ftp.login(username=username, passwd=password)
             return True
     except:
         return False

@@ -87,6 +87,21 @@ def runCheck():
                 except:
                     print("HTTP poll failed, likely fault in parameters")
 
+
+
+            elif scoreObject["type"] == "ftp":
+                scoredObject["checksAttempt"] += 1
+                scoredObject["prevCheck"] = False
+                try:
+                    result = pollFTP(scoredObject["host"], scoredObject["port"], teamName)
+
+                    if result == True:
+                        scoredObject["checksUp"] += 1
+                        scoredObject["prevCheck"] = True
+                 except:
+                     print("FTP poll failed, likely fault in parameters")
+
+
             elif scoreObject["type"] == "ssh":
 
                 scoredObject["checksAttempt"] += 1
@@ -306,7 +321,7 @@ def main():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
     client = gspread.authorize(creds)
-    sheet = client.open("Engine")
+    sheet = client.open("KrustyKingdom")
     while True:
         getUserAuth(sheet)
         runCheck()

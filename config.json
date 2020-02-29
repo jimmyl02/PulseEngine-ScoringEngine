@@ -2,197 +2,152 @@
   "Team1": {
     "scoredObjects": [
       {
-        "type": "ssh",
-        "columnName": "ssh1",
-        "host": "192.168.1.6",
-        "port": "80",
-        "displayName": "khakis-ssh",
+        "type": "port",
+        "host": "10.0.2.2",
+        "port": "21",
+        "displayName": "Acres - FTP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.4",
+        "host": "10.0.2.2",
+        "port": "139",
+        "displayName": "Acres - SMB",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "10.0.2.3",
         "port": "3306",
-        "displayName": "slacks-mysql",
+        "displayName": "Krab - MySQL",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
-      {
-        "type": "port",
-        "host": "192.168.1.5",
-        "port": "80",
-        "displayName": "shinyshoes-http",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.5",
-        "port": "445",
-        "displayName": "jacket-smb",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.2",
-        "port": "53",
-        "displayName": "tuxedo-dns",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      }
-    ]
-  },
-  "Team2": {
-    "scoredObjects": [
       {
         "type": "ssh",
-        "columnName": "ssh1",
-        "host": "192.168.1.6",
+        "columnName": "sshkrab",
+        "host": "10.0.2.3",
+        "port": "22",
+        "displayName": "Krab - SSH",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "http",
+        "md5": "tobedetermined",
+        "host": "10.0.2.4",
         "port": "80",
-        "displayName": "khakis-ssh",
+        "displayName": "School - IIS",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.4",
-        "port": "3306",
-        "displayName": "slacks-mysql",
+        "host": "10.0.2.4",
+        "port": "3389",
+        "displayName": "School - RDP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
-        "type": "port",
-        "host": "192.168.1.5",
+        "type": "http",
+        "md5": "tobedetermined",
+        "host": "10.0.2.5",
         "port": "80",
-        "displayName": "shinyshoes-http",
+        "displayName": "Bucket - HTTP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
-      {
-        "type": "port",
-        "host": "192.168.1.5",
-        "port": "445",
-        "displayName": "jacket-smb",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.2",
-        "port": "53",
-        "displayName": "tuxedo-dns",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      }
-    ]
-  },
-  "Team3": {
-    "scoredObjects": [
       {
         "type": "ssh",
-        "columnName": "ssh1",
-        "host": "192.168.1.6",
-        "port": "80",
-        "displayName": "khakis-ssh",
+        "columnName": "sshbucket",
+        "host": "10.0.2.5",
+        "port": "22",
+        "displayName": "Bucket - SSH",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.4",
-        "port": "3306",
-        "displayName": "slacks-mysql",
+        "host": "10.0.2.6",
+        "port": "3389",
+        "displayName": "Atlantis - RDP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.5",
-        "port": "80",
-        "displayName": "shinyshoes-http",
+        "host": "10.0.2.7",
+        "port": "25",
+        "displayName": "WeenieHut - SMTP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.5",
-        "port": "445",
-        "displayName": "jacket-smb",
+        "host": "10.0.2.7",
+        "port": "139",
+        "displayName": "WeenieHut - Samba",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
-      {
-        "type": "port",
-        "host": "192.168.1.2",
-        "port": "53",
-        "displayName": "tuxedo-dns",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      }
-    ]
-  },
-  "Team4": {
-    "scoredObjects": [
       {
         "type": "ssh",
-        "columnName": "ssh1",
-        "host": "192.168.1.6",
+        "columnName": "sshweeniehut",
+        "host": "10.0.2.7",
+        "port": "22",
+        "displayName": "WeenieHut - SSH",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "http",
+        "md5": "tobedetermined",
+        "host": "10.0.2.9",
         "port": "80",
-        "displayName": "khakis-ssh",
+        "displayName": "Towers - HTTP",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "ftp",
+        "columnName": "ftpocean",
+        "host": "10.0.2.10",
+        "port": "21",
+        "displayName": "Ocean - FTP",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "192.168.1.4",
-        "port": "3306",
-        "displayName": "slacks-mysql",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.5",
-        "port": "80",
-        "displayName": "shinyshoes-http",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.5",
-        "port": "445",
-        "displayName": "jacket-smb",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "192.168.1.2",
+        "host": "10.0.2.10",
         "port": "53",
-        "displayName": "tuxedo-dns",
+        "displayName": "Ocean - DNS",
+        "checksUp": 0,
+        "checksAttempt": 0,
+        "prevCheck": true
+      },
+      {
+        "type": "port",
+        "host": "10.0.2.10",
+        "port": "389",
+        "displayName": "Ocean - Active Directory",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true

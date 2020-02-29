@@ -210,7 +210,7 @@ def genHTML():
     </style>
 
     <div id="wrapper">
-        <div class="heading">Troy HS CCDC Scoring Engine v1.0<br></div>
+        <div class="heading">Troy HS CCDC Scoring Engine v1.1<br></div>
         <div class="heading">Last Update: """ + time.ctime() +  """</div>
         <div class="row">
             <div class="block">

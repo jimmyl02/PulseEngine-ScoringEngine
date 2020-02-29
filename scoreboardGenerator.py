@@ -14,21 +14,25 @@ import pollers
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+from pollers import pollPort, pollHTTP, pollSSH, pollFTP
+
 loadedConfig = {}
-users = {}
-expectedUsers = []
+teamUsers = {}
 
 def getUserAuth(sheet):
-    global users
+    global teamUsers
     for teamName in loadedConfig:
         current = sheet.worksheet(teamName)
-        x = dict(zip(current.col_values(1), current.col_values(2)))
-        users[teamName] = x
+        usersByService = {}
+        allData = current.get_all_values()
+        for service in allData:
+            usersByService[service[0]] = service[1:]
+        teamUsers[teamName] = usersByService
+    #print(teamUsers)
 
 def loadConfig():
 
     global loadedConfig
-    global expectedUsers
 
     with open("./config.json", "r") as f:
 
@@ -39,12 +43,6 @@ def loadConfig():
 
             print("Failed to load config")
 
-    with open("expectedUsers.txt", "r") as f:
-        try:
-            expectedUsers = f.read().splitlines()
-        except:
-            print("Expected users weren't loaded")
-
 def runCheck():
 
     for teamName in loadedConfig:
@@ -54,12 +52,10 @@ def runCheck():
         for scoredObject in scoredObjects:
 
             if scoredObject["type"] == "port":
-
                 scoredObject["checksAttempt"] += 1
                 scoredObject["prevCheck"] = False
 
                 try:
-
                     result = pollPort(scoredObject["host"], scoredObject["port"])
 
                     if result == True:
@@ -68,16 +64,13 @@ def runCheck():
                         scoredObject["prevCheck"] = True
 
                 except:
-
                     print("Port poll failed, likely fault in parameters")
 
-            elif scoreObject["type"] == "http":
-
+            elif scoredObject["type"] == "http":
                 scoredObject["checksAttempt"] += 1
                 scoredObject["prevCheck"] = False
 
                 try:
-
                     result = pollHTTP(scoredObject["host"], scoredObject["port"], scoredObject["md5"])
 
                     if result == True:
@@ -87,35 +80,30 @@ def runCheck():
                 except:
                     print("HTTP poll failed, likely fault in parameters")
 
-
-
-            elif scoreObject["type"] == "ftp":
+            elif scoredObject["type"] == "ftp":
                 scoredObject["checksAttempt"] += 1
                 scoredObject["prevCheck"] = False
                 try:
-                    result = pollFTP(scoredObject["host"], scoredObject["port"], teamName)
+                    result = pollFTP(scoredObject["host"], scoredObject["port"], teamUsers[teamName][scoredObject["columnName"]])
 
                     if result == True:
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
-                 except:
-                     print("FTP poll failed, likely fault in parameters")
+                except:
+                    print("FTP poll failed, likely fault in parameters")
 
-
-            elif scoreObject["type"] == "ssh":
-
+            elif scoredObject["type"] == "ssh":
                 scoredObject["checksAttempt"] += 1
                 scoredObject["prevCheck"] = False
-                try:
 
-                    result = pollSSH(scoredObject["host"], scoredObject["port"], expectedUsers, teamName)
+                try:
+                    result = pollSSH(scoredObject["host"], scoredObject["port"], teamUsers[teamName][scoredObject["columnName"]])
 
                     if result == True:
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
 
                 except:
-
                     print("SSH poll failed, likely fault in parameters")
 
             else:
@@ -313,9 +301,6 @@ def saveConfig():
 
         json.dump(loadedConfig, f)
 
-    with open("./users.json", "w+") as f:
-        json.dump(users, f)
-
 def main():
     loadConfig()
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -326,6 +311,7 @@ def main():
         getUserAuth(sheet)
         runCheck()
         genHTML()
+        print("hit gen")
         saveConfig()
         time.sleep(10)
 

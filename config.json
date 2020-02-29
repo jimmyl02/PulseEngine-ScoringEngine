@@ -40,7 +40,7 @@
       },
       {
         "type": "http",
-        "md5": "tobedetermined",
+        "md5": "d99766b214437642ae83385a5df9a95d",
         "host": "10.0.2.4",
         "port": "80",
         "displayName": "School - IIS",
@@ -59,7 +59,7 @@
       },
       {
         "type": "http",
-        "md5": "tobedetermined",
+        "md5": "9788c822554040317f5f0d1f36d6640a",
         "host": "10.0.2.5",
         "port": "80",
         "displayName": "Bucket - HTTP",
@@ -116,7 +116,7 @@
       },
       {
         "type": "http",
-        "md5": "tobedetermined",
+        "md5": "3526531ccd6c6a1d2340574a305a18f8",
         "host": "10.0.2.9",
         "port": "80",
         "displayName": "Towers - HTTP",

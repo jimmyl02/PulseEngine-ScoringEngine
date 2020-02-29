@@ -103,7 +103,8 @@ def runCheck():
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
 
-                except:
+                except Exception as e:
+                    print(e)
                     print("SSH poll failed, likely fault in parameters")
 
             else:
@@ -311,7 +312,6 @@ def main():
         getUserAuth(sheet)
         runCheck()
         genHTML()
-        print("hit gen")
         saveConfig()
         time.sleep(10)
 

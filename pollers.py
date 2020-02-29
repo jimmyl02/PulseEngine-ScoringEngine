@@ -50,6 +50,5 @@ def pollFTP(ip, port, users):
             password = user.split(":")[1]
             ftp.login(username, password)
         return True
-    except Exception as e:
-        print(e)
+    except:
         return False

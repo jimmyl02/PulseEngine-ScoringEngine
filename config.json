@@ -146,8 +146,8 @@
       {
         "type": "port",
         "host": "10.0.2.10",
-        "port": "389",
-        "displayName": "Ocean - Active Directory",
+        "port": "445",
+        "displayName": "Ocean - AD",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true

@@ -32,23 +32,24 @@ def pollSSH(ip, port, users):
                 continue
             username = user.split(":")[0]
             password = user.split(":")[1]
-            if(subprocess.call("sshpass -p \'" + password + "\' ssh -q -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"" +  username + "@" + ip + " -p " + port + " exit", shell=True) != 0):
+            if(subprocess.call("sshpass -p \"" + password + "\" ssh -q -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\" " +  username + "@" + ip + " -p " + port + " exit", shell=True) != 0):
                     return False
         return True
-    except Exception as e:
-        print(e)
+    except:
         return False
 
 
 def pollFTP(ip, port, users):
     try:
+        ftp = FTP()
+        ftp.connect(ip, int(port), timeout=3)
         for user in users:
             if ":" not in user:
                 continue
             username = user.split(":")[0]
             password = user.split(":")[1]
-            ftp = FTP(ip, port, timeout=3)
-            ftp.login(user=username, passwd=password)
+            ftp.login(username, password)
         return True
-    except:
+    except Exception as e:
+        print(e)
         return False

@@ -103,8 +103,7 @@ def runCheck():
                         scoredObject["checksUp"] += 1
                         scoredObject["prevCheck"] = True
 
-                except Exception as e:
-                    print(e)
+                except:
                     print("SSH poll failed, likely fault in parameters")
 
             else:

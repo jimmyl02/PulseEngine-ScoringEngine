@@ -3,7 +3,7 @@
     "scoredObjects": [
       {
         "type": "port",
-        "host": "10.0.2.10",
+        "host": "10.0.2.2",
         "port": "53",
         "displayName": "Acres - DNS",
         "checksUp": 0,
@@ -12,7 +12,7 @@
       },
       {
         "type": "port",
-        "host": "10.0.2.10",
+        "host": "10.0.2.2",
         "port": "445",
         "displayName": "Acres - AD",
         "checksUp": 0,

@@ -32,7 +32,7 @@ def pollSSH(ip, port, users):
                 continue
             username = user.split(":")[0]
             password = user.split(":")[1]
-            if(subprocess.call("sshpass -f <(printf '%s\n'" + password + ") ssh -q -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"" +  username + "@" + ip + " -p " + port + " exit", shell=True) != 0):
+            if(subprocess.call("sshpass -p \'" + password + "\' ssh -q -o \"UserKnownHostsFile=/dev/null\" -o \"StrictHostKeyChecking=no\"" +  username + "@" + ip + " -p " + port + " exit", shell=True) != 0):
                     return False
         return True
     except Exception as e:

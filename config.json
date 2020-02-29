@@ -3,18 +3,18 @@
     "scoredObjects": [
       {
         "type": "port",
-        "host": "10.0.2.2",
-        "port": "21",
-        "displayName": "Acres - FTP",
+        "host": "10.0.2.10",
+        "port": "53",
+        "displayName": "Acres - DNS",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
       },
       {
         "type": "port",
-        "host": "10.0.2.2",
-        "port": "139",
-        "displayName": "Acres - SMB",
+        "host": "10.0.2.10",
+        "port": "445",
+        "displayName": "Acres - AD",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true
@@ -137,17 +137,8 @@
       {
         "type": "port",
         "host": "10.0.2.10",
-        "port": "53",
-        "displayName": "Ocean - DNS",
-        "checksUp": 0,
-        "checksAttempt": 0,
-        "prevCheck": true
-      },
-      {
-        "type": "port",
-        "host": "10.0.2.10",
-        "port": "445",
-        "displayName": "Ocean - AD",
+        "port": "139",
+        "displayName": "Ocean - SMB",
         "checksUp": 0,
         "checksAttempt": 0,
         "prevCheck": true

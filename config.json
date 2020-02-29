@@ -59,7 +59,7 @@
       },
       {
         "type": "http",
-        "md5": "9788c822554040317f5f0d1f36d6640a",
+        "md5": "f6396e8bac8fee21fc187f77d836d49c",
         "host": "10.0.2.5",
         "port": "80",
         "displayName": "Bucket - HTTP",

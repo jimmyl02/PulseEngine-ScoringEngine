@@ -1,0 +1,73 @@
+{
+  "compId": "83ca7691-25e8-40ae-b311-1cfb8ad8e6b3",
+  "apikey": "a231abdb-e8e5-426b-ac61-b6ef6aba9660",
+  "teams": [{
+      "teamname": "team1",
+      "scoredObjects": [
+        {
+          "type": "port",
+          "host": "192.168.1.6",
+          "port": "80",
+          "displayName": "khakis-http"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.4",
+          "port": "3306",
+          "displayName": "slacks-mysql"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.5",
+          "port": "80",
+          "displayName": "shinyshoes-http"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.5",
+          "port": "445",
+          "displayName": "jacket-smb"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.2",
+          "port": "53",
+          "displayName": "tuxedo-dns"
+        }
+      ]
+    },{
+      "teamname": "team2",
+      "scoredObjects": [
+        {
+          "type": "port",
+          "host": "192.168.1.6",
+          "port": "80",
+          "displayName": "khakis-http"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.4",
+          "port": "3306",
+          "displayName": "slacks-mysql"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.5",
+          "port": "80",
+          "displayName": "shinyshoes-http"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.5",
+          "port": "445",
+          "displayName": "jacket-smb"
+        },
+        {
+          "type": "port",
+          "host": "192.168.1.2",
+          "port": "53",
+          "displayName": "tuxedo-dns"
+        }
+      ]
+    }]
+}

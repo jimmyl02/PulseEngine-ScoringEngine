@@ -1,7 +1,4 @@
-client_secret.json
-index.html
-config_save.json
-
+config.json
 
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python

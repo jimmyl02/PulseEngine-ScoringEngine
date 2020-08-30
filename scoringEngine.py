@@ -30,8 +30,15 @@ def loadConfig():
             print("[!] Failed to load config")
 
 def sendStatus(teamName, teamServices):
-    print(teamName)
-    print(teamServices)
+    r = requests.post('https://ccdcscoring.jimmyli.us/api/competitions/update', json={
+        "compId": compId,
+        "apikey": apikey,
+        "teamname": teamName,
+        "services": teamServices
+    })
+    resp = r.json()
+    if resp["status"] != "success":
+        print("[!] There was a problem while sending the scores")
 
 def runCheck():
     for team in teams:

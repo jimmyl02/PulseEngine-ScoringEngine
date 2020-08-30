@@ -88,6 +88,7 @@ def main():
     loadConfig()
     print("[*] Config loaded, beginning scoring now")
     while True:
+        loadConfig() # Reload the config during each run to help with user passwords
         runCheck()
         time.sleep(10)
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-CCDC Scoring Engine
+PulseEngine Scoring Engine
 
 @author: jimmy
 """
